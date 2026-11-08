@@ -1,0 +1,12 @@
+{
+  "name": "AMANI - أماني",
+  "short_name": "AMANI",
+  "description": "القرآن الكريم والأذكار والأدعية ومواقيت الصلاة",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/AMANI/",
+  "scope": "/AMANI/",
+  "display": "standalone",
+  "background_color": "#10100d",
+  "theme_color": "#10100d"
+}
