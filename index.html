@@ -5,119 +5,131 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10100d">
-<meta name="description" content="AMANI - القرآن الكريم والأذكار والأدعية ومواقيت الصلاة">
-<link rel="manifest" href="/AMANI/manifest.json">
-<title>AMANI - أماني</title>
+<meta name="description" content="أماني - القرآن الكريم والأذكار والأدعية ومواقيت الصلاة">
+<link rel="manifest" href="./manifest.json">
+<title>أماني AMANI</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#10100d;color:#fff;font-family:Arial,sans-serif}
-header{text-align:center;padding:25px 10px;background:#191810;border-bottom:1px solid #b99b45}
-header h1{font-size:38px;color:#e5c66b;margin:5px}
-header p{color:#ccc}
-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;position:sticky;top:0;background:#10100d;z-index:5}
-button{background:#292518;color:#e5c66b;border:1px solid #806b32;padding:12px 15px;border-radius:12px;font-size:15px;cursor:pointer}
-button:active{background:#806b32}
-main{padding:12px;max-width:700px;margin:auto}
-section{display:none;background:#191810;padding:17px;border-radius:15px;margin:12px 0}
+body{margin:0;background:#10100d;color:#fff;font-family:Tahoma,Arial;line-height:1.8}
+header{text-align:center;padding:22px;background:#191811;border-bottom:1px solid #b99a43}
+h1{color:#e0c36a;margin:0;font-size:32px}
+header p{color:#ccc;margin:4px}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px}
+button{background:#b99a43;color:#17140b;border:0;padding:10px 15px;border-radius:10px;font-weight:bold;cursor:pointer}
+main{max-width:850px;margin:auto;padding:12px}
+section{display:none;background:#1b1a14;padding:18px;border:1px solid #514522;border-radius:14px;margin-bottom:15px}
 section.active{display:block}
-h2{color:#e5c66b}
-.item{padding:14px;margin:10px 0;background:#292518;border-radius:10px;line-height:2;text-align:center}
-select{padding:12px;background:#292518;color:white;border-radius:10px;width:100%;margin:10px 0;border:1px solid #806b32}
-audio{width:100%;margin:15px 0}
-.counter{text-align:center;font-size:28px;color:#e5c66b;margin:15px}
-.big{font-size:22px;line-height:2.2}
-footer{text-align:center;color:#c5ad65;padding:25px}
+h2{color:#e0c36a}
+.card{background:#262419;padding:14px;border-radius:12px;margin:10px 0}
+.ayah{font-size:23px;text-align:center;line-height:2.2;color:#f5e8bd}
+select{width:100%;padding:12px;margin:8px 0;border-radius:8px;background:#10100d;color:white;border:1px solid #b99a43}
+footer{text-align:center;color:#aaa;padding:20px}
+#count{font-size:50px;color:#e0c36a}
 </style>
 </head>
 <body>
 
 <header>
-<h1>AMANI 🌙</h1>
-<p>القرآن الكريم • الأذكار • الأدعية • مواقيت الصلاة</p>
+<h1>أماني AMANI</h1>
+<p>رفيقك إلى الطمأنينة وذكر الله ❤️</p>
 </header>
 
 <nav>
 <button onclick="show('home')">الرئيسية</button>
-<button onclick="show('quran')">القرآن</button>
+<button onclick="show('quran')">القرآن الكريم</button>
 <button onclick="show('azkar')">الأذكار</button>
+<button onclick="show('tasbih')">التسبيح</button>
 <button onclick="show('dua')">الأدعية</button>
-<button onclick="show('prayer')">الصلاة</button>
+<button onclick="show('prayer')">مواقيت الصلاة</button>
 <button onclick="show('about')">عن التطبيق</button>
 </nav>
 
 <main>
 
 <section id="home" class="active">
-<h2>مرحبا بك في AMANI ❤️</h2>
-<div class="item big">﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾</div>
-<p style="text-align:center">اجعل القرآن والذكر نور يومك.</p>
+<h2>مرحبا بك في أماني ❤️</h2>
+<p>اجعل لسانك رطباً بذكر الله واجعل القرآن نور قلبك.</p>
+<div class="card">
+<h3>رسالة صاحب التطبيق</h3>
+<p style="color:#e6cd83;text-align:center">
+السلام عليكم ورحمة الله وبركاته ❤️<br>
+أنا أماني بوزيان، صاحب تطبيق أماني.<br>
+أنشأت هذا التطبيق ليكون رفيقاً لكل مسلم في قراءة القرآن الكريم والأذكار والتقرب إلى الله.<br>
+أتمنى أن يكون هذا العمل صدقة جارية، وأن ينفع كل من يستعمله.<br>
+لا تنسوني من صالح دعائكم.<br>
+— أماني بوزيان ❤️
+</p>
+</div>
 </section>
 
 <section id="quran">
-<h2>📖 القرآن الكريم</h2>
-<select id="surah" onchange="loadSurah()">
-<option>جاري تحميل السور...</option>
+<h2>القرآن الكريم</h2>
+<select id="surah">
+<option value="">اختر السورة</option>
 </select>
-<div id="verses" class="item">اختر سورة.</div>
-<h3 style="color:#e5c66b">تلاوة بصوت الشيخ مشاري العفاسي</h3>
-<audio id="audio" controls></audio>
+<button onclick="loadSurah()">عرض السورة</button>
+<div id="quranText" class="card">اختر سورة لعرض آياتها.</div>
 </section>
 
 <section id="azkar">
-<h2>📿 الأذكار</h2>
-<div class="item">
-<div class="big">سبحان الله وبحمده</div>
-<button onclick="count(this)">سبّح</button>
-<div class="counter">0</div>
+<h2>الأذكار</h2>
+<div class="card">
+<h3>أذكار الصباح</h3>
+<p>أصبحنا وأصبح الملك لله والحمد لله.</p>
+<p>اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور.</p>
+<p>رضيت بالله رباً وبالإسلام ديناً وبمحمد ﷺ نبياً.</p>
 </div>
-<div class="item">
-<div class="big">أستغفر الله العظيم وأتوب إليه</div>
-<button onclick="count(this)">استغفر</button>
-<div class="counter">0</div>
+<div class="card">
+<h3>أذكار المساء</h3>
+<p>أمسينا وأمسى الملك لله والحمد لله.</p>
+<p>اللهم بك أمسينا وبك أصبحنا وبك نحيا وبك نموت وإليك المصير.</p>
+<p>أستغفر الله العظيم وأتوب إليه.</p>
 </div>
-<div class="item">
-<div class="big">لا إله إلا الله وحده لا شريك له</div>
-<button onclick="count(this)">اذكر الله</button>
-<div class="counter">0</div>
+<div class="card">
+<h3>أذكار متنوعة</h3>
+<p>سبحان الله وبحمده.</p>
+<p>سبحان الله العظيم.</p>
+<p>لا إله إلا الله.</p>
+<p>لا حول ولا قوة إلا بالله.</p>
+<p>اللهم صل وسلم على نبينا محمد.</p>
 </div>
-<div class="item">
-<div class="big">اللهم صل وسلم على نبينا محمد</div>
-<button onclick="count(this)">صلّ على النبي</button>
-<div class="counter">0</div>
+</section>
+
+<section id="tasbih">
+<h2>عداد التسبيح</h2>
+<div class="card" style="text-align:center">
+<div id="count">0</div>
+<button onclick="increment()">سبّح</button>
+<button onclick="resetCount()">إعادة العداد</button>
 </div>
 </section>
 
 <section id="dua">
-<h2>🤲 الأدعية</h2>
-<div class="item big">اللهم اغفر لي وارحمني واهدني وارزقني.</div>
-<div class="item big">ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار.</div>
-<div class="item big">اللهم إني أسألك العفو والعافية في الدنيا والآخرة.</div>
-<div class="item big">رب اشرح لي صدري ويسر لي أمري.</div>
-<div class="item big">اللهم ارزقنا راحة البال وسعة الرزق.</div>
-<div class="item big">اللهم احفظ أهلنا وأحبابنا من كل سوء.</div>
+<h2>الأدعية</h2>
+<div class="card">ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار.</div>
+<div class="card">اللهم اغفر لي ولوالدي وللمؤمنين والمؤمنات.</div>
+<div class="card">اللهم ارزقنا راحة البال وطمأنينة القلب وحسن الخاتمة.</div>
+<div class="card">اللهم اشف مرضانا وارحم موتانا وفرّج هم المهمومين.</div>
+<div class="card">رب اشرح لي صدري ويسر لي أمري.</div>
 </section>
 
 <section id="prayer">
-<h2>🕌 مواقيت الصلاة</h2>
-<p>اسمح للتطبيق بتحديد موقعك لعرض المواقيت.</p>
-<button onclick="getPrayer()">تحديد موقعي وعرض المواقيت</button>
-<div id="times" class="item">اضغط على الزر.</div>
+<h2>مواقيت الصلاة</h2>
+<p>مواقيت الصلاة في مدينة الوادي.</p>
+<button onclick="getPrayer()">تحديث المواقيت</button>
+<div id="prayerTimes" class="card">اضغط لتحديث مواقيت الصلاة.</div>
 </section>
 
 <section id="about">
-<h2>عن تطبيق AMANI</h2>
-<div class="item big">
-AMANI تطبيق إسلامي لمساعدة المسلمين على قراءة القرآن الكريم والمحافظة على الأذكار والأدعية ومعرفة مواقيت الصلاة.
-</div>
-<div class="item">صاحب التطبيق: أماني بوزيان</div>
+<h2>عن تطبيق أماني</h2>
+<p>تطبيق أماني يساعدك على قراءة القرآن الكريم والأذكار والأدعية والتسبيح ومعرفة مواقيت الصلاة.</p>
+<p>نسأل الله أن يجعله عملاً خالصاً لوجهه الكريم وصدقة جارية.</p>
+<p style="color:#e0c36a">صاحب التطبيق: أماني بوزيان ❤️</p>
 </section>
 
 </main>
 
-<footer>
-<p>AMANI © 2026</p>
-<p>اللهم اجعل هذا العمل صدقة جارية</p>
-</footer>
+<footer>AMANI © 2026 — اللهم اجعله عملاً نافعاً</footer>
 
 <script>
 function show(id){
@@ -126,101 +138,85 @@ document.getElementById(id).classList.add('active');
 window.scrollTo(0,0);
 }
 
-function count(btn){
-let c=btn.parentElement.querySelector('.counter');
-c.textContent=Number(c.textContent)+1;
+let count=0;
+function increment(){
+count++;
+document.getElementById('count').textContent=count;
+}
+function resetCount(){
+count=0;
+document.getElementById('count').textContent=count;
 }
 
-async function getSurahs(){
-const select=document.getElementById('surah');
+async function initSurahs(){
 try{
 const r=await fetch('https://api.alquran.cloud/v1/surah');
 const j=await r.json();
-select.innerHTML='';
+const select=document.getElementById('surah');
 j.data.forEach(s=>{
-const o=document.createElement('option');
-o.value=s.number;
-o.textContent=s.number+' - '+s.name;
-select.appendChild(o);
+const option=document.createElement('option');
+option.value=s.number;
+option.textContent=s.number+' - '+s.name;
+select.appendChild(option);
 });
-loadSurah();
 }catch(e){
-select.innerHTML='<option>تعذر تحميل السور</option>';
-document.getElementById('verses').textContent='تحقق من اتصال الإنترنت.';
+document.getElementById('quranText').textContent='تعذر تحميل السور. تحقق من الإنترنت.';
 }
 }
 
 async function loadSurah(){
 const n=document.getElementById('surah').value;
-if(!n)return;
-const box=document.getElementById('verses');
-box.textContent='جاري تحميل الآيات...';
+const box=document.getElementById('quranText');
+if(!n){box.textContent='اختر سورة أولاً.';return;}
+box.textContent='جاري تحميل السورة...';
 try{
 const r=await fetch('https://api.alquran.cloud/v1/surah/'+n);
 const j=await r.json();
 box.innerHTML='';
+const title=document.createElement('h3');
+title.style.textAlign='center';
+title.style.color='#e0c36a';
+title.textContent=j.data.name;
+box.appendChild(title);
 j.data.ayahs.forEach(a=>{
-const d=document.createElement('div');
-d.className='item big';
-d.textContent=a.text+' ۞';
-box.appendChild(d);
+const p=document.createElement('p');
+p.className='ayah';
+p.textContent=a.text+' ۞';
+box.appendChild(p);
 });
-document.getElementById('audio').src=
-'https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+n+'.mp3';
-localStorage.setItem('lastSurah',n);
 }catch(e){
-box.textContent='تعذر تحميل الآيات.';
+box.textContent='تعذر تحميل السورة. تحقق من الإنترنت.';
 }
 }
 
 async function getPrayer(){
-const box=document.getElementById('times');
-box.textContent='جاري تحديد الموقع...';
-if(!navigator.geolocation){
-box.textContent='المتصفح لا يدعم تحديد الموقع.';
-return;
-}
-navigator.geolocation.getCurrentPosition(async pos=>{
+const box=document.getElementById('prayerTimes');
+box.textContent='جاري جلب المواقيت...';
 try{
-const lat=pos.coords.latitude;
-const lon=pos.coords.longitude;
-const r=await fetch('https://api.aladhan.com/v1/timings?latitude='+lat+'&longitude='+lon+'&method=3');
+const url='https://api.aladhan.com/v1/timingsByCity?city=El%20Oued&country=Algeria&method=3';
+const r=await fetch(url);
 const j=await r.json();
 const t=j.data.timings;
 const names={
-Fajr:'الفجر',
-Sunrise:'الشروق',
-Dhuhr:'الظهر',
-Asr:'العصر',
-Maghrib:'المغرب',
-Isha:'العشاء'
+Fajr:'الفجر',Sunrise:'الشروق',Dhuhr:'الظهر',
+Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'
 };
 box.innerHTML='';
 Object.keys(names).forEach(k=>{
-const d=document.createElement('div');
-d.className='item';
-d.textContent=names[k]+' : '+t[k];
-box.appendChild(d);
+const p=document.createElement('p');
+p.textContent=names[k]+' : '+t[k];
+box.appendChild(p);
 });
 }catch(e){
-box.textContent='تعذر تحميل مواقيت الصلاة.';
+box.textContent='تعذر تحميل المواقيت. تحقق من الإنترنت.';
 }
-},()=>{
-box.textContent='اسمح للتطبيق باستعمال الموقع.';
-});
 }
 
-const saved=localStorage.getItem('lastSurah');
-getSurahs().then(()=>{
-if(saved){
-document.getElementById('surah').value=saved;
-loadSurah();
-}
-});
+initSurahs();
 
 if('serviceWorker' in navigator){
 window.addEventListener('load',()=>{
-navigator.serviceWorker.register('/AMANI/sw.js').catch(()=>{});
+navigator.serviceWorker.register('./sw.js').catch(()=>{});
 });
 }
 </script>
