@@ -1,7 +1,7 @@
 {
   "name": "AMANI",
   "short_name": "AMANI",
-  "description": "تطبيق أماني بوزيان",
+  "description": "تطبيق أماني بوزيان للقرآن الكريم والأذكار والأدعية",
   "start_url": "/AMANI/",
   "scope": "/AMANI/",
   "display": "standalone",
@@ -9,5 +9,13 @@
   "background_color": "#101018",
   "theme_color": "#101018",
   "lang": "ar",
-  "dir": "rtl"
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/AMANI/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
