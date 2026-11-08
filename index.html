@@ -1,29 +1,228 @@
-const CACHE = "amani-v1";
-const FILES = [
-  "/AMANI/",
-  "/AMANI/index.html",
-  "/AMANI/manifest.json"
-];
 
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(FILES))
-  );
-  self.skipWaiting();
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10100d">
+<meta name="description" content="AMANI - القرآن الكريم والأذكار والأدعية ومواقيت الصلاة">
+<link rel="manifest" href="/AMANI/manifest.json">
+<title>AMANI - أماني</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#10100d;color:#fff;font-family:Arial,sans-serif}
+header{text-align:center;padding:25px 10px;background:#191810;border-bottom:1px solid #b99b45}
+header h1{font-size:38px;color:#e5c66b;margin:5px}
+header p{color:#ccc}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;position:sticky;top:0;background:#10100d;z-index:5}
+button{background:#292518;color:#e5c66b;border:1px solid #806b32;padding:12px 15px;border-radius:12px;font-size:15px;cursor:pointer}
+button:active{background:#806b32}
+main{padding:12px;max-width:700px;margin:auto}
+section{display:none;background:#191810;padding:17px;border-radius:15px;margin:12px 0}
+section.active{display:block}
+h2{color:#e5c66b}
+.item{padding:14px;margin:10px 0;background:#292518;border-radius:10px;line-height:2;text-align:center}
+select{padding:12px;background:#292518;color:white;border-radius:10px;width:100%;margin:10px 0;border:1px solid #806b32}
+audio{width:100%;margin:15px 0}
+.counter{text-align:center;font-size:28px;color:#e5c66b;margin:15px}
+.big{font-size:22px;line-height:2.2}
+footer{text-align:center;color:#c5ad65;padding:25px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>AMANI 🌙</h1>
+<p>القرآن الكريم • الأذكار • الأدعية • مواقيت الصلاة</p>
+</header>
+
+<nav>
+<button onclick="show('home')">الرئيسية</button>
+<button onclick="show('quran')">القرآن</button>
+<button onclick="show('azkar')">الأذكار</button>
+<button onclick="show('dua')">الأدعية</button>
+<button onclick="show('prayer')">الصلاة</button>
+<button onclick="show('about')">عن التطبيق</button>
+</nav>
+
+<main>
+
+<section id="home" class="active">
+<h2>مرحبا بك في AMANI ❤️</h2>
+<div class="item big">﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾</div>
+<p style="text-align:center">اجعل القرآن والذكر نور يومك.</p>
+</section>
+
+<section id="quran">
+<h2>📖 القرآن الكريم</h2>
+<select id="surah" onchange="loadSurah()">
+<option>جاري تحميل السور...</option>
+</select>
+<div id="verses" class="item">اختر سورة.</div>
+<h3 style="color:#e5c66b">تلاوة بصوت الشيخ مشاري العفاسي</h3>
+<audio id="audio" controls></audio>
+</section>
+
+<section id="azkar">
+<h2>📿 الأذكار</h2>
+<div class="item">
+<div class="big">سبحان الله وبحمده</div>
+<button onclick="count(this)">سبّح</button>
+<div class="counter">0</div>
+</div>
+<div class="item">
+<div class="big">أستغفر الله العظيم وأتوب إليه</div>
+<button onclick="count(this)">استغفر</button>
+<div class="counter">0</div>
+</div>
+<div class="item">
+<div class="big">لا إله إلا الله وحده لا شريك له</div>
+<button onclick="count(this)">اذكر الله</button>
+<div class="counter">0</div>
+</div>
+<div class="item">
+<div class="big">اللهم صل وسلم على نبينا محمد</div>
+<button onclick="count(this)">صلّ على النبي</button>
+<div class="counter">0</div>
+</div>
+</section>
+
+<section id="dua">
+<h2>🤲 الأدعية</h2>
+<div class="item big">اللهم اغفر لي وارحمني واهدني وارزقني.</div>
+<div class="item big">ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار.</div>
+<div class="item big">اللهم إني أسألك العفو والعافية في الدنيا والآخرة.</div>
+<div class="item big">رب اشرح لي صدري ويسر لي أمري.</div>
+<div class="item big">اللهم ارزقنا راحة البال وسعة الرزق.</div>
+<div class="item big">اللهم احفظ أهلنا وأحبابنا من كل سوء.</div>
+</section>
+
+<section id="prayer">
+<h2>🕌 مواقيت الصلاة</h2>
+<p>اسمح للتطبيق بتحديد موقعك لعرض المواقيت.</p>
+<button onclick="getPrayer()">تحديد موقعي وعرض المواقيت</button>
+<div id="times" class="item">اضغط على الزر.</div>
+</section>
+
+<section id="about">
+<h2>عن تطبيق AMANI</h2>
+<div class="item big">
+AMANI تطبيق إسلامي لمساعدة المسلمين على قراءة القرآن الكريم والمحافظة على الأذكار والأدعية ومعرفة مواقيت الصلاة.
+</div>
+<div class="item">صاحب التطبيق: أماني بوزيان</div>
+</section>
+
+</main>
+
+<footer>
+<p>AMANI © 2026</p>
+<p>اللهم اجعل هذا العمل صدقة جارية</p>
+</footer>
+
+<script>
+function show(id){
+document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
+}
+
+function count(btn){
+let c=btn.parentElement.querySelector('.counter');
+c.textContent=Number(c.textContent)+1;
+}
+
+async function getSurahs(){
+const select=document.getElementById('surah');
+try{
+const r=await fetch('https://api.alquran.cloud/v1/surah');
+const j=await r.json();
+select.innerHTML='';
+j.data.forEach(s=>{
+const o=document.createElement('option');
+o.value=s.number;
+o.textContent=s.number+' - '+s.name;
+select.appendChild(o);
+});
+loadSurah();
+}catch(e){
+select.innerHTML='<option>تعذر تحميل السور</option>';
+document.getElementById('verses').textContent='تحقق من اتصال الإنترنت.';
+}
+}
+
+async function loadSurah(){
+const n=document.getElementById('surah').value;
+if(!n)return;
+const box=document.getElementById('verses');
+box.textContent='جاري تحميل الآيات...';
+try{
+const r=await fetch('https://api.alquran.cloud/v1/surah/'+n);
+const j=await r.json();
+box.innerHTML='';
+j.data.ayahs.forEach(a=>{
+const d=document.createElement('div');
+d.className='item big';
+d.textContent=a.text+' ۞';
+box.appendChild(d);
+});
+document.getElementById('audio').src=
+'https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+n+'.mp3';
+localStorage.setItem('lastSurah',n);
+}catch(e){
+box.textContent='تعذر تحميل الآيات.';
+}
+}
+
+async function getPrayer(){
+const box=document.getElementById('times');
+box.textContent='جاري تحديد الموقع...';
+if(!navigator.geolocation){
+box.textContent='المتصفح لا يدعم تحديد الموقع.';
+return;
+}
+navigator.geolocation.getCurrentPosition(async pos=>{
+try{
+const lat=pos.coords.latitude;
+const lon=pos.coords.longitude;
+const r=await fetch('https://api.aladhan.com/v1/timings?latitude='+lat+'&longitude='+lon+'&method=3');
+const j=await r.json();
+const t=j.data.timings;
+const names={
+Fajr:'الفجر',
+Sunrise:'الشروق',
+Dhuhr:'الظهر',
+Asr:'العصر',
+Maghrib:'المغرب',
+Isha:'العشاء'
+};
+box.innerHTML='';
+Object.keys(names).forEach(k=>{
+const d=document.createElement('div');
+d.className='item';
+d.textContent=names[k]+' : '+t[k];
+box.appendChild(d);
+});
+}catch(e){
+box.textContent='تعذر تحميل مواقيت الصلاة.';
+}
+},()=>{
+box.textContent='اسمح للتطبيق باستعمال الموقع.';
+});
+}
+
+const saved=localStorage.getItem('lastSurah');
+getSurahs().then(()=>{
+if(saved){
+document.getElementById('surah').value=saved;
+loadSurah();
+}
 });
 
-self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
+if('serviceWorker' in navigator){
+window.addEventListener('load',()=>{
+navigator.serviceWorker.register('/AMANI/sw.js').catch(()=>{});
 });
-
-self.addEventListener("fetch", event => {
-  if (event.request.method !== "GET") return;
-  event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request))
-  );
-});
+}
+</script>
+</body>
+</html>
