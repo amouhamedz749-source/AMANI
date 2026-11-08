@@ -3,76 +3,52 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101827">
-<title>AMANI - أماني</title>
+<title>AMANI</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#101827;color:white;font-family:Arial,sans-serif}
-header{padding:25px 20px;background:linear-gradient(135deg,#174c64,#101827);text-align:center}
-.logo{font-size:38px;font-weight:900;color:#53e0c1;letter-spacing:4px}
-header p{color:#c5d7df}
-main{padding:18px;max-width:650px;margin:auto}
-.welcome{background:#1c2b40;padding:22px;border-radius:18px;margin-bottom:18px}
-h2{margin-top:0}
-.section{background:#1a293d;border:1px solid #2d4058;padding:18px;border-radius:16px;margin:13px 0}
-button{border:0;background:#42d6b2;color:#10232c;padding:13px 20px;border-radius:12px;font-weight:bold;font-size:15px;cursor:pointer}
-input,textarea{width:100%;padding:13px;margin:9px 0;background:#101827;color:white;border:1px solid #40536b;border-radius:10px;font-size:15px}
-.ad{border:1px dashed #42d6b2;text-align:center;padding:17px;border-radius:14px;color:#b9f5e8}
-footer{text-align:center;padding:25px;color:#91a3b8;font-size:13px}
-.small{font-size:13px;color:#a9bdce}
+header{background:#18263b;padding:28px 18px;text-align:center}
+h1{font-size:38px;color:#54e0b5;margin:5px}
+header p{color:#c4d0df}
+main{padding:20px;max-width:600px;margin:auto}
+.card{background:#1b2b42;padding:20px;border-radius:16px;margin:15px 0}
+h2{color:#54e0b5}
+button{background:#54e0b5;color:#102033;border:0;border-radius:10px;padding:12px 20px;font-size:16px;font-weight:bold}
+input,textarea{width:100%;padding:13px;margin:8px 0;border:0;border-radius:9px;font-size:16px}
+footer{text-align:center;color:#9aabc0;padding:25px}
 </style>
 </head>
 <body>
 <header>
-<div class="logo">AMANI</div>
-<p>مرحبا بك في عالم أماني ❤️</p>
+<h1>AMANI</h1>
+<p>مرحبا بك في تطبيق أماني</p>
 </header>
 <main>
-<div class="welcome">
-<h2>أهلاً وسهلاً بك 👋</h2>
-<p>أماني، مساحة رقمية بسيطة تجمع بين الأمل والإبداع.</p>
-<button onclick="alert('أهلاً بك في تطبيق AMANI ❤️')">ابدأ الآن</button>
+<div class="card">
+<h2>أهلاً وسهلاً بك ❤️</h2>
+<p>تطبيق AMANI مساحة بسيطة للتواصل ومشاركة الأفكار.</p>
 </div>
-
-<div class="section">
-<h2>🌟 عن AMANI</h2>
-<p>AMANI مشروع رقمي يهدف إلى تقديم تجربة بسيطة وجميلة للمستخدمين.</p>
+<div class="card">
+<h2>عن صاحب التطبيق</h2>
+<p>تم إنشاء هذا التطبيق بواسطة أماني بوزيان.</p>
 </div>
-
-<div class="section">
-<h2>💌 اترك رسالتك</h2>
+<div class="card">
+<h2>اترك رسالتك</h2>
 <input id="name" placeholder="اسمك">
-<textarea id="message" rows="4" placeholder="اكتب رسالتك هنا..."></textarea>
+<textarea id="message" placeholder="اكتب رسالتك هنا"></textarea>
 <button onclick="sendMessage()">إرسال</button>
-<p id="result" class="small"></p>
-</div>
-
-<div class="section">
-<h2>📱 تطبيق AMANI</h2>
-<p>يمكنك إضافة هذا الموقع إلى الشاشة الرئيسية من قائمة المتصفح.</p>
-</div>
-
-<div class="ad">
-<strong>إعلان خاص</strong>
-<p>هذا التطبيق من تطوير أماني بوزيان ❤️</p>
+<p id="result"></p>
 </div>
 </main>
-<footer>
-AMANI © 2026<br>
-صنع بكل حب بواسطة أماني بوزيان
-</footer>
+<footer>© AMANI 2026</footer>
 <script>
 function sendMessage(){
 let n=document.getElementById('name').value.trim();
 let m=document.getElementById('message').value.trim();
-if(!n||!m){alert('يرجى ملء جميع الخانات');return}
-let messages=JSON.parse(localStorage.getItem('amani_messages')||'[]');
-messages.push({name:n,message:m,date:new Date().toISOString()});
-localStorage.setItem('amani_messages',JSON.stringify(messages));
-document.getElementById('result').innerText='تم حفظ رسالتك على هذا الجهاز ❤️';
-document.getElementById('name').value='';
-document.getElementById('message').value='';
+if(!n||!m){document.getElementById('result').innerText='أكمل المعلومات أولاً';return;}
+document.getElementById('result').innerText='شكراً '+n+' ❤️';
 }
 </script>
 </body>
