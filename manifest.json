@@ -12,7 +12,7 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "/AMANI/icon-512.png",
+      "src": "./amani-icon-512(1)-1.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
